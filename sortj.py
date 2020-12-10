@@ -9,7 +9,7 @@ def main():
     sort_func_text = "lambda x: " + sort_text
     sort_func = eval(sort_func_text)
     out = sorted(indata, key = sort_func)
-    print(json.dumps(out, indent=4, sort_keys=True))
+    print(json.dumps(out, indent=4))
 
 if __name__ == "__main__":
     main()

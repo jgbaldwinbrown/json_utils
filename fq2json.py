@@ -17,7 +17,7 @@ def main():
         if i%4 == 3:
             qual = l
             out.append({"header": header, "seq": seq, "qual": qual})
-    print(json.dumps(out, indent=4, sort_keys=True))
+    print(json.dumps(out, indent=4))
 
 if __name__ == "__main__":
     main()
