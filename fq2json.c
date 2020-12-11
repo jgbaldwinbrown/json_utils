@@ -7,7 +7,7 @@ void fq2json(FILE *inconn) {
     ssize_t nread;
     size_t iter = 0;
     
-    puts("[");
+    puts("{\n    \"entries\":\n    [");
     while ((nread = getline(&line, &len, inconn)) != -1) {
         line[nread-1] = 0;
         switch (iter%4) {
@@ -15,13 +15,13 @@ void fq2json(FILE *inconn) {
             if (iter > 0) {
                 puts(",");
             }
-            printf("    {\n        \"header\": \"%s\",\n", &line[1]);
+            printf("        {\n            \"header\": \"%s\",\n", &line[1]);
             break;
         case 1:
-            printf("        \"seq\": \"%s\",\n", line);
+            printf("            \"seq\": \"%s\",\n", line);
             break;
         case 3:
-            printf("        \"qual\": \"%s\"\n    }", line);
+            printf("            \"qual\": \"%s\"\n        }", line);
             break;
         default:
             break;
@@ -29,7 +29,7 @@ void fq2json(FILE *inconn) {
         iter++;
     }
     puts("");
-    puts("]");
+    puts("    ]\n}");
 }
 
 int main() {
