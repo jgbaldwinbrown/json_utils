@@ -1,0 +1,59 @@
+{
+    "$schema": "fqschema",
+    "title": "fastq",
+    "description": "A file containing sequencing reads with quality scores",
+    "type": "object",
+    "properties":
+    {
+        "entries":
+        {
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "header":
+                    {
+                        "description": "A unique header, one for each fastq entry",
+                        "type": "string"
+                    },
+                    "seq":
+                    {
+                        "description": "The sequence contained in this entry",
+                        "type": "string"
+                    },
+                    "qual":
+                    {
+                        "description": "The quality scores (in fastq text format) associated with the sequence",
+                        "type": "string"
+                    },
+                    "qual_numeric_values":
+                    {
+                        "description": "The direct numeric values corresponding to \"qual\" quality scores, non-transformed",
+                        "type": "array",
+                        "items":
+                        {
+                            "type": "number"
+                        }
+                    },
+                    "error_probabilities":
+                    {
+                        "description": "The probability of a base containing an error, as calculated from the qual scores (optional).",
+                        "type": "array",
+                        "items":
+                        {
+                            "type": "number"
+                        }
+                    }
+                }
+            },
+            "required": ["header", "seq", "qual"]
+        },
+        "qual_offset":
+        {
+            "description": "The offset of the ASCII value needed to calculate quality from ASCII quality scores (optional, assume 33 if not specified).",
+            "type": "number"
+        }
+    }
+}
