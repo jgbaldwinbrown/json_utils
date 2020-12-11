@@ -4,7 +4,7 @@ import sys
 import json
 
 def main():
-    out = []
+    out = {"entries": []}
     header = ""
     seq = ""
     qual = ""
@@ -16,7 +16,7 @@ def main():
             seq = l
         if i%4 == 3:
             qual = l
-            out.append({"header": header, "seq": seq, "qual": qual})
+            out["entries"].append({"header": header, "seq": seq, "qual": qual})
     print(json.dumps(out, indent=4))
 
 if __name__ == "__main__":
