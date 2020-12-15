@@ -7,7 +7,7 @@ void fq2json(FILE *inconn) {
     ssize_t nread;
     size_t iter = 0;
     
-    puts("{\n    \"entries\":\n    [");
+    puts("{\n    \"entries\": [");
     while ((nread = getline(&line, &len, inconn)) != -1) {
         line[nread-1] = 0;
         switch (iter%4) {
