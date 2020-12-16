@@ -21,6 +21,12 @@ struct strlist init_strlist(size_t cap) {
     return(out);
 }
 
+void free_strlist(struct strlist list) {
+    for (size_t i=0; i<list.len; i++) {
+        free(list.entries[i]);
+    }
+}
+
 void add_entry(char *entry, struct strlist *list) {
     if (list->len >= list->cap) {
         list->entries = realloc(list->entries, sizeof(char *) * list->cap * 2);
@@ -57,6 +63,7 @@ struct strlist get_header_names(FILE *inconn) {
     
     return(header_names);
     
+    free(line);
 }
 
 void print_header(struct strlist header_names) {
@@ -97,6 +104,7 @@ void parse_entries(FILE *inconn, FILE *outconn, struct strlist header_names) {
         printf("\n        }");
         line_number++;
     }
+    free(line);
 }
 
 void table2json(FILE *inconn, FILE *outconn) {
@@ -105,6 +113,7 @@ void table2json(FILE *inconn, FILE *outconn) {
     print_header(header_names);
     parse_entries(inconn, outconn, header_names);
     printf("\n    ]\n}\n");
+    free_strlist(header_names);
 }
 
 int main() {
